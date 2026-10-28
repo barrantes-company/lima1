@@ -124,8 +124,17 @@ public class MainActivity extends Activity {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
         lp.topMargin = dp(8);
         host.setLayoutParams(lp);
-        View view = WidgetBinder.bind(this, style, lock).apply(this, host);
-        host.addView(view, match());
+        try {
+            View view = WidgetBinder.bind(this, style, lock).apply(this, host);
+            host.addView(view, match());
+        } catch (RuntimeException error) {
+            String detail = error.getMessage();
+            if (detail == null || detail.isEmpty()) detail = error.getClass().getSimpleName();
+            if (detail.length() > 110) detail = detail.substring(0, 110);
+            TextView fail = text(detail, 12, 0xFFFF7A3C, false);
+            fail.setPadding(0, dp(12), 0, 0);
+            host.addView(fail);
+        }
         return host;
     }
 

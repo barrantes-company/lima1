@@ -59,6 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="end"
+            android:minWidth="76dp"
             android:orientation="vertical">
             <ImageView
                 android:id="@+id/sun"
@@ -71,7 +72,12 @@
                 android:id="@+id/temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:fontFamily="@font/manrope"
+                android:gravity="end"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:minWidth="64dp"
                 android:text="—°"
                 android:textColor="#C6FF3A"
                 android:textSize="28sp" />

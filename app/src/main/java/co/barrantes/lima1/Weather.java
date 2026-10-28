@@ -61,8 +61,13 @@ public final class Weather {
     }
 
     private static double[] ip() throws Exception {
-        JSONObject json = new JSONObject(get("https://get.geojs.io/v1/ip/geo.json"));
-        return new double[]{Double.parseDouble(String.valueOf(json.get("latitude"))), Double.parseDouble(String.valueOf(json.get("longitude")))};
+        try {
+            JSONObject json = new JSONObject(get("https://get.geojs.io/v1/ip/geo.json"));
+            return new double[]{Double.parseDouble(String.valueOf(json.get("latitude"))), Double.parseDouble(String.valueOf(json.get("longitude")))};
+        } catch (Exception first) {
+            JSONObject json = new JSONObject(get("https://api.bigdatacloud.net/data/reverse-geocode-client?localityLanguage=es"));
+            return new double[]{json.getDouble("latitude"), json.getDouble("longitude")};
+        }
     }
 
     private static int meteo(double lat, double lon) throws Exception {

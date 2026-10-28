@@ -20,7 +20,7 @@
             android:alpha="0.42"
             android:contentDescription="@string/logo"
             android:src="@drawable/logo" />
-        <Space android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" />
+        <TextView android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" android:text="" />
         <ImageView
             android:id="@+id/sun"
             android:layout_width="18dp"
@@ -65,13 +65,11 @@
                     android:layout_height="7dp"
                     android:contentDescription="@null"
                     android:src="@drawable/dot" />
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="5dp" />
                 <ImageView
                     android:id="@+id/dot2"
                     android:layout_width="7dp"
                     android:layout_height="7dp"
+                    android:layout_marginTop="5dp"
                     android:contentDescription="@null"
                     android:src="@drawable/dot" />
             </LinearLayout>
