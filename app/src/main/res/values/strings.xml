@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">lima1</string>
+    <string name="logo">Barrantes CO</string>
+    <string name="temp">Temperatura</string>
+    <string name="w_editorial">Editorial</string>
+    <string name="w_instrumento">Instrumento</string>
+    <string name="w_senal">Señal</string>
+    <string name="w_cartel">Cartel</string>
+    <string name="w_editorial_lock">Editorial bloqueo</string>
+    <string name="w_instrumento_lock">Instrumento bloqueo</string>
+    <string name="w_senal_lock">Señal bloqueo</string>
+    <string name="w_cartel_lock">Cartel bloqueo</string>
+    <string name="w_editorial_desc">Reloj editorial de lima1</string>
+    <string name="w_instrumento_desc">Reloj instrumento de lima1</string>
+    <string name="w_senal_desc">Reloj señal de lima1</string>
+    <string name="w_cartel_desc">Reloj cartel de lima1</string>
+</resources>
