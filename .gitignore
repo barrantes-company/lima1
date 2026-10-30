@@ -1,7 +1,12 @@
 .gradle/
 build/
 local.properties
+keystore.properties
+signing/
 *.apk
+*.aab
+*.jks
+*.keystore
 .idea/
 .DS_Store
 captures/
