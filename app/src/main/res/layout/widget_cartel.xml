@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="40dp"
+        android:layout_width="28dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:alpha="0.16"
@@ -35,7 +35,7 @@
                 android:format24Hour="H"
                 android:includeFontPadding="false"
                 android:textColor="@color/ink"
-                android:textSize="46sp" />
+                android:textSize="60sp" />
             <TextClock
                 android:id="@+id/minute"
                 android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
                 android:format24Hour="mm"
                 android:includeFontPadding="false"
                 android:textColor="@color/ink"
-                android:textSize="46sp" />
+                android:textSize="60sp" />
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"

@@ -78,22 +78,22 @@ public final class WidgetBinder {
         views.setViewPadding(R.id.root, pad, pad, pad, pad);
         views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, narrow ? compactTime(style) : wideTime(style));
         views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, narrow ? compactTime(style) : wideTime(style));
-        views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, narrow ? 16 : 22);
-        views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, shortHeight ? 12 : 14);
+        views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, narrow ? 15 : 18);
+        views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, 12);
         views.setViewVisibility(R.id.logo, narrow ? View.GONE : View.VISIBLE);
         views.setViewVisibility(R.id.date, shortHeight ? View.GONE : View.VISIBLE);
     }
 
     private static float wideTime(String style) {
-        if ("instrumento".equals(style)) return 40f;
-        if ("cartel".equals(style)) return 46f;
-        return 48f;
+        if ("instrumento".equals(style)) return 58f;
+        if ("cartel".equals(style)) return 60f;
+        return 72f;
     }
 
     private static float compactTime(String style) {
-        if ("instrumento".equals(style)) return 34f;
-        if ("cartel".equals(style)) return 38f;
-        return 40f;
+        if ("instrumento".equals(style)) return 46f;
+        if ("cartel".equals(style)) return 48f;
+        return 56f;
     }
 
     private static int description(String style) {
