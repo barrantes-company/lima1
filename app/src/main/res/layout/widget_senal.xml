@@ -48,7 +48,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:fontFamily="@font/manrope"
+                android:fontFamily="@font/manrope_time"
+                android:fontFeatureSettings="tnum"
+                android:letterSpacing="-0.03"
                 android:format12Hour="h"
                 android:format24Hour="H"
                 android:textColor="@color/ink"
@@ -56,21 +58,20 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginBottom="6dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:orientation="vertical">
                 <ImageView
                     android:id="@+id/dot1"
-                    android:layout_width="7dp"
-                    android:layout_height="7dp"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
                     android:contentDescription="@null"
                     android:src="@drawable/dot" />
                 <ImageView
                     android:id="@+id/dot2"
-                    android:layout_width="7dp"
-                    android:layout_height="7dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="7dp"
                     android:contentDescription="@null"
                     android:src="@drawable/dot" />
             </LinearLayout>
@@ -79,7 +80,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:fontFamily="@font/manrope"
+                android:fontFamily="@font/manrope_time"
+                android:fontFeatureSettings="tnum"
+                android:letterSpacing="-0.03"
                 android:format12Hour="mm"
                 android:format24Hour="mm"
                 android:textColor="@color/ink"
