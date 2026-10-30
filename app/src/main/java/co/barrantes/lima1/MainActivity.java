@@ -61,10 +61,6 @@ public class MainActivity extends Activity {
             page.addView(section(STYLES[i], NAMES[i]));
         }
 
-        TextView note = text("El bloqueo solo aparece en el selector si tu Android lo permite. Si no, instálalo en el inicio.", 13, 0x80FFFFFF, false);
-        note.setPadding(0, dp(18), 0, 0);
-        page.addView(note);
-
         scroll.addView(page);
         frame.addView(scroll, match());
         setContentView(frame);
@@ -76,14 +72,8 @@ public class MainActivity extends Activity {
         TextView heading = text(name, 18, Color.WHITE, true);
         box.addView(heading);
         box.addView(swatches(style));
-
-        box.addView(kicker("Inicio"));
-        box.addView(preview(style, false, dp(168)));
-        box.addView(install("Instalar en inicio", homeClass(style)));
-
-        box.addView(kicker("Bloqueo"));
-        box.addView(preview(style, true, dp(230)));
-        box.addView(install("Instalar en bloqueo", lockClass(style)));
+        box.addView(preview(style, dp(168)));
+        box.addView(install("Instalar", homeClass(style)));
         return box;
     }
 
@@ -119,13 +109,13 @@ public class MainActivity extends Activity {
         return row;
     }
 
-    private FrameLayout preview(String style, boolean lock, int height) {
+    private FrameLayout preview(String style, int height) {
         FrameLayout host = new FrameLayout(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
         lp.topMargin = dp(8);
         host.setLayoutParams(lp);
         try {
-            View view = WidgetBinder.bind(this, style, lock).apply(this, host);
+            View view = WidgetBinder.bind(this, style).apply(this, host);
             host.addView(view, match());
         } catch (RuntimeException error) {
             String detail = error.getMessage();
@@ -165,13 +155,6 @@ public class MainActivity extends Activity {
         Toast.makeText(this, "Mantén pulsado el inicio y elige Widgets. Busca lima1.", Toast.LENGTH_LONG).show();
     }
 
-    private TextView kicker(String value) {
-        TextView view = text(value.toUpperCase(), 11, 0x80FFFFFF, true);
-        view.setLetterSpacing(0.14f);
-        view.setPadding(0, dp(14), 0, 0);
-        return view;
-    }
-
     private TextView text(String value, int sp, int color, boolean bold) {
         TextView view = new TextView(this);
         view.setText(value);
@@ -201,15 +184,6 @@ public class MainActivity extends Activity {
             case "senal" -> SenalWidget.class;
             case "cartel" -> CartelWidget.class;
             default -> EditorialWidget.class;
-        };
-    }
-
-    private static Class<?> lockClass(String style) {
-        return switch (style) {
-            case "instrumento" -> InstrumentoLockWidget.class;
-            case "senal" -> SenalLockWidget.class;
-            case "cartel" -> CartelLockWidget.class;
-            default -> EditorialLockWidget.class;
         };
     }
 

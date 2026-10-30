@@ -45,29 +45,5 @@
             </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/w_cartel" />
         </receiver>
-        <receiver android:name=".EditorialLockWidget" android:exported="true" android:label="@string/w_editorial_lock">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/w_editorial_lock" />
-        </receiver>
-        <receiver android:name=".InstrumentoLockWidget" android:exported="true" android:label="@string/w_instrumento_lock">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/w_instrumento_lock" />
-        </receiver>
-        <receiver android:name=".SenalLockWidget" android:exported="true" android:label="@string/w_senal_lock">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/w_senal_lock" />
-        </receiver>
-        <receiver android:name=".CartelLockWidget" android:exported="true" android:label="@string/w_cartel_lock">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/w_cartel_lock" />
-        </receiver>
     </application>
 </manifest>
