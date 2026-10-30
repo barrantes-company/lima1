@@ -76,8 +76,11 @@ public final class WidgetBinder {
         float density = ctx.getResources().getDisplayMetrics().density;
         int pad = Math.round((narrow || shortHeight ? 10 : 14) * density);
         views.setViewPadding(R.id.root, pad, pad, pad, pad);
-        views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, narrow ? compactTime(style) : wideTime(style));
-        views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, narrow ? compactTime(style) : wideTime(style));
+        float hourSize = narrow ? compactTime(style) : wideTime(style);
+        float minuteSize = "cartel".equals(style) ? hourSize * 0.88f : hourSize;
+        views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, hourSize);
+        views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, minuteSize);
+        if ("cartel".equals(style)) views.setTextColor(R.id.minute, 0xB8F4F4F2);
         views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, narrow ? 15 : 18);
         views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, 12);
         views.setViewVisibility(R.id.logo, narrow ? View.GONE : View.VISIBLE);
@@ -86,13 +89,13 @@ public final class WidgetBinder {
 
     private static float wideTime(String style) {
         if ("instrumento".equals(style)) return 58f;
-        if ("cartel".equals(style)) return 60f;
+        if ("cartel".equals(style)) return 64f;
         return 72f;
     }
 
     private static float compactTime(String style) {
         if ("instrumento".equals(style)) return 46f;
-        if ("cartel".equals(style)) return 48f;
+        if ("cartel".equals(style)) return 52f;
         return 56f;
     }
 

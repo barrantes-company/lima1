@@ -32,24 +32,24 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope_time"
                 android:fontFeatureSettings="tnum"
-                android:letterSpacing="-0.03"
+                android:letterSpacing="-0.04"
                 android:format12Hour="h"
                 android:format24Hour="H"
                 android:includeFontPadding="false"
                 android:textColor="@color/ink"
-                android:textSize="60sp" />
+                android:textSize="64sp" />
             <TextClock
                 android:id="@+id/minute"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope_time"
                 android:fontFeatureSettings="tnum"
-                android:letterSpacing="-0.03"
+                android:letterSpacing="-0.02"
                 android:format12Hour="mm"
                 android:format24Hour="mm"
                 android:includeFontPadding="false"
-                android:textColor="@color/ink"
-                android:textSize="60sp" />
+                android:textColor="@color/minute"
+                android:textSize="56sp" />
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"

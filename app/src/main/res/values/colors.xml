@@ -4,6 +4,7 @@
     <color name="surface">#E6121212</color>
     <color name="stroke">#18FFFFFF</color>
     <color name="ink">#F4F4F2</color>
+    <color name="minute">#B8F4F4F2</color>
     <color name="date">#75FFFFFF</color>
     <color name="track">#22FFFFFF</color>
     <color name="ink_soft">#B3FFFFFF</color>
