@@ -4,6 +4,8 @@
     android:initialLayout="@layout/widget_editorial"
     android:minWidth="250dp"
     android:minHeight="110dp"
+    android:minResizeWidth="180dp"
+    android:minResizeHeight="80dp"
     android:previewLayout="@layout/widget_editorial"
     android:resizeMode="horizontal|vertical"
     android:targetCellWidth="4"

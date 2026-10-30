@@ -34,7 +34,7 @@
                 android:fontFamily="@font/manrope"
                 android:format12Hour="h"
                 android:format24Hour="H"
-                android:textColor="#F4F4F2"
+                android:textColor="@color/ink"
                 android:textSize="40sp" />
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
                 android:fontFamily="@font/manrope"
                 android:format12Hour="mm"
                 android:format24Hour="mm"
-                android:textColor="#F4F4F2"
+                android:textColor="@color/ink"
                 android:textSize="40sp" />
         </LinearLayout>
         <TextView android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" android:text="" />
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope"
                 android:text="—°"
-                android:textColor="#C6FF3A"
+                android:textColor="@color/ink"
                 android:textSize="22sp" />
             <TextView
                 android:id="@+id/unit"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope"
                 android:text="CELSIUS"
-                android:textColor="#B3C6FF3A"
+                android:textColor="@color/ink"
                 android:textSize="9sp" />
         </LinearLayout>
     </LinearLayout>
@@ -106,7 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/manrope"
-        android:textColor="#75FFFFFF"
+        android:textColor="@color/date"
         android:textSize="13sp" />
 
 </LinearLayout>

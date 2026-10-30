@@ -34,7 +34,7 @@
                 android:format12Hour="h"
                 android:format24Hour="H"
                 android:includeFontPadding="false"
-                android:textColor="#F4F4F2"
+                android:textColor="@color/ink"
                 android:textSize="46sp" />
             <TextClock
                 android:id="@+id/minute"
@@ -44,7 +44,7 @@
                 android:format12Hour="mm"
                 android:format24Hour="mm"
                 android:includeFontPadding="false"
-                android:textColor="#F4F4F2"
+                android:textColor="@color/ink"
                 android:textSize="46sp" />
             <TextView
                 android:id="@+id/date"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/manrope"
-                android:textColor="#75FFFFFF"
+                android:textColor="@color/date"
                 android:textSize="13sp" />
         </LinearLayout>
         <LinearLayout
@@ -79,7 +79,7 @@
                 android:maxLines="1"
                 android:minWidth="64dp"
                 android:text="—°"
-                android:textColor="#C6FF3A"
+                android:textColor="@color/ink"
                 android:textSize="28sp" />
             <TextView
                 android:id="@+id/unit"
@@ -88,7 +88,7 @@
                 android:layout_gravity="end"
                 android:fontFamily="@font/manrope"
                 android:text="Celsius"
-                android:textColor="#B3C6FF3A"
+                android:textColor="@color/ink"
                 android:textSize="11sp" />
         </LinearLayout>
     </LinearLayout>

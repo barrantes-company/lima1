@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.InsetDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -84,22 +85,30 @@ public class MainActivity extends Activity {
         row.setPadding(0, dp(10), 0, dp(4));
         String current = Prefs.palette(this, style);
         for (String id : Palette.ALL) {
+            boolean selected = id.equals(current);
             Button chip = new Button(this);
             chip.setText("");
+            chip.setMinimumWidth(0);
+            chip.setMinimumHeight(0);
+            chip.setMinWidth(0);
+            chip.setMinHeight(0);
+            chip.setPadding(0, 0, 0, 0);
             GradientDrawable circle = new GradientDrawable();
             circle.setShape(GradientDrawable.OVAL);
             circle.setColor(Palette.color(id));
-            if (id.equals(current)) {
-                circle.setStroke(dp(2), Color.WHITE);
-            }
-            chip.setBackground(circle);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(dp(22), dp(22));
-            lp.setMarginEnd(dp(10));
+            if (selected) circle.setStroke(dp(2), Color.WHITE);
+            chip.setBackground(new InsetDrawable(circle, dp(10)));
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(dp(44), dp(44));
+            lp.setMarginEnd(dp(4));
             chip.setLayoutParams(lp);
-            chip.setContentDescription(Palette.label(id));
+            String spoken = selected
+                    ? getString(R.string.palette_selected, Palette.label(id))
+                    : Palette.label(id);
+            chip.setContentDescription(spoken);
             chip.setOnClickListener(v -> {
                 Prefs.setPalette(this, style, id);
                 BaseWidget.push(this);
+                Toast.makeText(this, getString(R.string.palette_applied, Palette.label(id), widgetName(style)), Toast.LENGTH_SHORT).show();
                 render();
             });
             row.addView(chip);
@@ -150,6 +159,7 @@ public class MainActivity extends Activity {
         AppWidgetManager manager = AppWidgetManager.getInstance(this);
         if (Build.VERSION.SDK_INT >= 26 && manager.isRequestPinAppWidgetSupported()) {
             manager.requestPinAppWidget(new ComponentName(this, type), null, null);
+            Toast.makeText(this, getString(R.string.pin_requested, widgetName(styleOf(type))), Toast.LENGTH_SHORT).show();
             return;
         }
         Toast.makeText(this, "Mantén pulsado el inicio y elige Widgets. Busca lima1.", Toast.LENGTH_LONG).show();
@@ -176,6 +186,22 @@ public class MainActivity extends Activity {
 
     private int dp(int value) {
         return Math.round(value * getResources().getDisplayMetrics().density);
+    }
+
+    private static String widgetName(String style) {
+        return switch (style) {
+            case "instrumento" -> "Instrumento";
+            case "senal" -> "Señal";
+            case "cartel" -> "Cartel";
+            default -> "Editorial";
+        };
+    }
+
+    private static String styleOf(Class<?> type) {
+        if (type == InstrumentoWidget.class) return "instrumento";
+        if (type == SenalWidget.class) return "senal";
+        if (type == CartelWidget.class) return "cartel";
+        return "editorial";
     }
 
     private static Class<?> homeClass(String style) {

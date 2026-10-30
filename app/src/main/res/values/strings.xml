@@ -6,8 +6,11 @@
     <string name="w_instrumento">Instrumento</string>
     <string name="w_senal">Señal</string>
     <string name="w_cartel">Cartel</string>
-    <string name="w_editorial_desc">Reloj editorial de lima1</string>
-    <string name="w_instrumento_desc">Reloj instrumento de lima1</string>
-    <string name="w_senal_desc">Reloj señal de lima1</string>
-    <string name="w_cartel_desc">Reloj cartel de lima1</string>
+    <string name="w_editorial_desc">Reloj editorial de lima1, en la pantalla de inicio</string>
+    <string name="w_instrumento_desc">Reloj instrumento de lima1, en la pantalla de inicio</string>
+    <string name="w_senal_desc">Reloj señal de lima1, en la pantalla de inicio</string>
+    <string name="w_cartel_desc">Reloj cartel de lima1, en la pantalla de inicio</string>
+    <string name="palette_selected">%1$s, seleccionada</string>
+    <string name="palette_applied">Paleta %1$s en %2$s</string>
+    <string name="pin_requested">Se pidió %1$s para el inicio</string>
 </resources>
