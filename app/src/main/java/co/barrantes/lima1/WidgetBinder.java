@@ -15,36 +15,32 @@ import android.widget.RemoteViews;
 import java.util.Map;
 
 public final class WidgetBinder {
-    static final int NARROW = 0;
-    static final int MEDIUM = 1;
-    static final int WIDE = 2;
-
     private WidgetBinder() {}
 
     public static RemoteViews bind(Context ctx, String style) {
-        return fill(ctx, style, WIDE);
+        return fill(ctx, style, false, false);
     }
 
     public static RemoteViews bind(Context ctx, String style, Bundle options) {
         if (Build.VERSION.SDK_INT >= 31) {
             return new RemoteViews(Map.of(
-                    new SizeF(180f, 80f), fill(ctx, style, NARROW),
-                    new SizeF(250f, 110f), fill(ctx, style, MEDIUM),
-                    new SizeF(320f, 140f), fill(ctx, style, WIDE)));
+                    new SizeF(180f, 80f), fill(ctx, style, true, true),
+                    new SizeF(180f, 110f), fill(ctx, style, true, false),
+                    new SizeF(250f, 80f), fill(ctx, style, false, true),
+                    new SizeF(320f, 140f), fill(ctx, style, false, false)));
         }
-        return fill(ctx, style, sizeOf(options));
+        boolean narrow = false;
+        boolean shortHeight = false;
+        if (options != null) {
+            int width = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 320);
+            int height = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 140);
+            narrow = width < 230;
+            shortHeight = height < 105;
+        }
+        return fill(ctx, style, narrow, shortHeight);
     }
 
-    static int sizeOf(Bundle options) {
-        if (options == null) return WIDE;
-        int width = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 320);
-        int height = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 140);
-        if (width < 200 || height < 90) return NARROW;
-        if (width < 280 || height < 120) return MEDIUM;
-        return WIDE;
-    }
-
-    private static RemoteViews fill(Context ctx, String style, int size) {
+    private static RemoteViews fill(Context ctx, String style, boolean narrow, boolean shortHeight) {
         RemoteViews views = new RemoteViews(ctx.getPackageName(), layout(style));
         int accent = Palette.color(Prefs.palette(ctx, style));
         String temp = Prefs.tempText(ctx, usesUnit(style));
@@ -72,36 +68,32 @@ public final class WidgetBinder {
                 views.setColorStateList(R.id.day, "setProgressBackgroundTintList", ColorStateList.valueOf(0x22FFFFFF));
             }
         }
-        fit(ctx, views, style, size);
+        fit(ctx, views, style, narrow, shortHeight);
         return views;
     }
 
-    private static void fit(Context ctx, RemoteViews views, String style, int size) {
+    private static void fit(Context ctx, RemoteViews views, String style, boolean narrow, boolean shortHeight) {
         float density = ctx.getResources().getDisplayMetrics().density;
-        int pad = Math.round((size == NARROW ? 8 : size == MEDIUM ? 10 : 14) * density);
+        int pad = Math.round((narrow || shortHeight ? 10 : 14) * density);
         views.setViewPadding(R.id.root, pad, pad, pad, pad);
-        float time = timeSize(style, size);
-        views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, time);
-        views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, time);
-        views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, size == NARROW ? 16 : size == MEDIUM ? 18 : 22);
-        views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, size == WIDE ? 14 : 12);
-        views.setViewVisibility(R.id.logo, hideLogo(style, size) ? View.GONE : View.VISIBLE);
-        views.setViewVisibility(R.id.date, hideDate(style, size) ? View.GONE : View.VISIBLE);
+        views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, narrow ? compactTime(style) : wideTime(style));
+        views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, narrow ? compactTime(style) : wideTime(style));
+        views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, narrow ? 16 : 22);
+        views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, shortHeight ? 12 : 14);
+        views.setViewVisibility(R.id.logo, narrow ? View.GONE : View.VISIBLE);
+        views.setViewVisibility(R.id.date, shortHeight ? View.GONE : View.VISIBLE);
     }
 
-    private static float timeSize(String style, int size) {
-        float wide = "instrumento".equals(style) ? 40f : "cartel".equals(style) ? 46f : 48f;
-        if (size == WIDE) return wide;
-        if (size == MEDIUM) return wide * 0.82f;
-        return wide * 0.66f;
+    private static float wideTime(String style) {
+        if ("instrumento".equals(style)) return 40f;
+        if ("cartel".equals(style)) return 46f;
+        return 48f;
     }
 
-    private static boolean hideLogo(String style, int size) {
-        return size == NARROW && ("editorial".equals(style) || "instrumento".equals(style));
-    }
-
-    private static boolean hideDate(String style, int size) {
-        return size == NARROW && ("senal".equals(style) || "cartel".equals(style));
+    private static float compactTime(String style) {
+        if ("instrumento".equals(style)) return 34f;
+        if ("cartel".equals(style)) return 38f;
+        return 40f;
     }
 
     private static int description(String style) {

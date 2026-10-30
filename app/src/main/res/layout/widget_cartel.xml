@@ -52,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/manrope"
+                android:letterSpacing="0.04"
                 android:textColor="@color/date"
                 android:textSize="13sp" />
         </LinearLayout>

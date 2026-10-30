@@ -31,6 +31,7 @@
                 android:id="@+id/hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:includeFontPadding="false"
                 android:fontFamily="@font/manrope"
                 android:format12Hour="h"
                 android:format24Hour="H"
@@ -61,6 +62,7 @@
                 android:id="@+id/minute"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:includeFontPadding="false"
                 android:fontFamily="@font/manrope"
                 android:format12Hour="mm"
                 android:format24Hour="mm"
@@ -106,6 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/manrope"
+        android:letterSpacing="0.04"
         android:textColor="@color/date"
         android:textSize="13sp" />
 
