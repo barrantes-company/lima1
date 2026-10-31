@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,8 @@ public class MainActivity extends Activity {
     private static final int HAIRLINE = 0x24FFFFFF;
     private static final int SURFACE = 0xD91A1B16;
     private static final int BACKGROUND = 0xFF12130F;
+    private Typeface face;
+    private Typeface timeFace;
 
     private static final String[] STYLES = {
             "ccentro", "ceditorial", "cinstrumento", "csenal", "ccartel",
@@ -52,6 +55,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         getWindow().setStatusBarColor(BACKGROUND);
         getWindow().setNavigationBarColor(BACKGROUND);
+        face = getResources().getFont(R.font.manrope);
+        timeFace = getResources().getFont(R.font.manrope_time);
         render();
         if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 7);
@@ -79,17 +84,18 @@ public class MainActivity extends Activity {
         int side = dp(20);
         page.setPadding(side, dp(22), side, dp(52));
         page.addView(masthead());
-        page.addView(rule(dp(30), dp(26)));
-        page.addView(label("COLECCIÓN 01  /  OCHO PIEZAS", MUTED));
+        page.addView(rule(dp(28), dp(8)));
 
         for (int i = 0; i < STYLES.length; i++) {
+            if (i == 0) page.addView(group("Compactos", "Cinco piezas de 180 × 120"));
+            if (i == 5) page.addView(group("Completos", "Tres piezas amplias"));
             page.addView(section(i));
         }
 
-        page.addView(rule(dp(34), dp(22)));
-        TextView note = text("Al estrechar", 16, INK, Typeface.BOLD);
+        page.addView(rule(dp(28), dp(18)));
+        TextView note = text("La hora es el dígito más grande.", 16, INK, Typeface.BOLD);
         page.addView(note);
-        TextView body = text("Si falta ancho, se oculta el logo. Si falta alto, se oculta la fecha. La pieza amplia no cambia.", 13, MUTED, Typeface.NORMAL);
+        TextView body = text("Ocho piezas. Cinco compactas y tres amplias. Elige el acento y colócala en el inicio.", 13, MUTED, Typeface.NORMAL);
         body.setPadding(0, dp(8), 0, 0);
         body.setLineSpacing(dp(3), 1f);
         page.addView(body);
@@ -109,7 +115,30 @@ public class MainActivity extends Activity {
         brandRow.addView(label("LIMA  /  2026", MUTED));
         header.addView(brandRow);
 
-        TextView title = text("Tiempo,\nen su lugar.", 42, INK, Typeface.BOLD);
+        LinearLayout clock = new LinearLayout(this);
+        clock.setOrientation(LinearLayout.HORIZONTAL);
+        clock.setGravity(Gravity.BOTTOM);
+        clock.setPadding(0, dp(26), 0, 0);
+        TextClock hour = new TextClock(this);
+        hour.setFormat12Hour("h");
+        hour.setFormat24Hour("H");
+        hour.setTextColor(INK);
+        hour.setTextSize(TypedValue.COMPLEX_UNIT_SP, 64);
+        hour.setTypeface(timeFace);
+        hour.setIncludeFontPadding(false);
+        clock.addView(hour);
+        TextClock minute = new TextClock(this);
+        minute.setFormat12Hour("mm");
+        minute.setFormat24Hour("mm");
+        minute.setTextColor(0xA6F1F0E8);
+        minute.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
+        minute.setTypeface(timeFace);
+        minute.setIncludeFontPadding(false);
+        minute.setPadding(dp(8), 0, 0, dp(8));
+        clock.addView(minute);
+        header.addView(clock);
+
+        TextView title = text("Tiempo, en su lugar.", 28, INK, Typeface.BOLD);
         title.setIncludeFontPadding(false);
         title.setLineSpacing(dp(-3), 0.94f);
         title.setPadding(0, dp(34), 0, 0);
@@ -117,31 +146,26 @@ public class MainActivity extends Activity {
 
         TextView lead = text("Relojes para la pantalla de inicio. Elige una pieza, define su acento y colócala en el día.", 15, 0xC9F1F0E8, Typeface.NORMAL);
         lead.setLineSpacing(dp(4), 1f);
-        lead.setPadding(0, dp(22), dp(18), 0);
+        lead.setPadding(0, dp(14), dp(12), 0);
         header.addView(lead);
 
-        LinearLayout facts = new LinearLayout(this);
-        facts.setOrientation(LinearLayout.HORIZONTAL);
-        facts.setPadding(0, dp(28), 0, 0);
-        facts.addView(fact("08", "DISEÑOS"), new LinearLayout.LayoutParams(0, dp(58), 1));
-        LinearLayout.LayoutParams second = new LinearLayout.LayoutParams(0, dp(58), 1);
-        second.setMarginStart(dp(10));
-        facts.addView(fact("03", "PALETAS"), second);
-        header.addView(facts);
+        TextView meta = label("08 PIEZAS    ·    03 PALETAS", MUTED);
+        meta.setPadding(0, dp(18), 0, 0);
+        header.addView(meta);
         return header;
     }
 
-    private LinearLayout fact(String value, String caption) {
-        LinearLayout box = column();
-        box.setPadding(dp(14), dp(9), dp(14), dp(8));
-        box.setBackground(surface(10, 0x12FFFFFF, HAIRLINE));
-        TextView number = text(value, 18, INK, Typeface.BOLD);
-        number.setIncludeFontPadding(false);
-        box.addView(number);
-        TextView captionView = label(caption, MUTED);
-        captionView.setPadding(0, dp(3), 0, 0);
-        box.addView(captionView);
-        return box;
+    private LinearLayout group(String titleText, String caption) {
+        LinearLayout block = column();
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.topMargin = dp(18);
+        block.setLayoutParams(params);
+        block.addView(label(titleText.toUpperCase(), INK));
+        TextView line = text(caption, 13, MUTED, Typeface.NORMAL);
+        line.setPadding(0, dp(4), 0, dp(2));
+        block.addView(line);
+        return block;
     }
 
     private LinearLayout section(int index) {
@@ -152,26 +176,27 @@ public class MainActivity extends Activity {
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         cardParams.topMargin = dp(index == 0 ? 20 : 16);
         card.setLayoutParams(cardParams);
-        card.setPadding(dp(16), dp(16), dp(16), dp(18));
-        card.setBackground(surface(18, SURFACE, HAIRLINE));
+        card.setPadding(dp(16), dp(14), dp(16), dp(14));
+        card.setBackground(surface(20, SURFACE, HAIRLINE));
 
-        LinearLayout heading = new LinearLayout(this);
-        heading.setOrientation(LinearLayout.HORIZONTAL);
-        heading.setGravity(Gravity.TOP);
+        View accentLine = new View(this);
+        accentLine.setBackgroundColor(accent);
+        LinearLayout.LayoutParams accentParams = new LinearLayout.LayoutParams(dp(28), dp(2));
+        accentParams.bottomMargin = dp(12);
+        card.addView(accentLine, accentParams);
+
         TextView number = text(String.format("%02d", index + 1), 11, accent, Typeface.BOLD);
-        number.setLetterSpacing(0.12f);
-        heading.addView(number, new LinearLayout.LayoutParams(dp(38), LinearLayout.LayoutParams.WRAP_CONTENT));
+        number.setLetterSpacing(0.16f);
+        card.addView(number);
 
-        LinearLayout copy = column();
-        TextView name = text(NAMES[index], 24, INK, Typeface.BOLD);
+        TextView name = text(NAMES[index], 22, INK, Typeface.BOLD);
         name.setIncludeFontPadding(false);
-        copy.addView(name);
+        name.setPadding(0, dp(4), 0, 0);
+        card.addView(name);
         TextView description = text(DESCRIPTIONS[index], 13, MUTED, Typeface.NORMAL);
         description.setLineSpacing(dp(2), 1f);
-        description.setPadding(0, dp(7), dp(4), 0);
-        copy.addView(description);
-        heading.addView(copy, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-        card.addView(heading);
+        description.setPadding(0, dp(6), 0, 0);
+        card.addView(description);
 
         card.addView(swatches(style));
         card.addView(preview(style, dp(168)));
@@ -235,13 +260,16 @@ public class MainActivity extends Activity {
     }
 
     private FrameLayout preview(String style, int height) {
+        boolean compact = style.startsWith("c") && !"cartel".equals(style) && !"centro".equals(style);
+        int frameHeight = compact ? dp(120) : height;
         FrameLayout host = new FrameLayout(this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
-        lp.topMargin = dp(12);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, frameHeight);
+        lp.topMargin = dp(14);
         host.setLayoutParams(lp);
         try {
             View view = WidgetBinder.bind(this, style).apply(this, host);
-            host.addView(view, match());
+            int width = compact ? dp(180) : FrameLayout.LayoutParams.MATCH_PARENT;
+            host.addView(view, new FrameLayout.LayoutParams(width, frameHeight, Gravity.CENTER_HORIZONTAL));
         } catch (RuntimeException error) {
             String detail = error.getMessage();
             if (detail == null || detail.isEmpty()) detail = error.getClass().getSimpleName();
@@ -255,13 +283,13 @@ public class MainActivity extends Activity {
 
     private Button install(String labelText, Class<?> type, int accent) {
         Button button = new Button(this);
-        button.setText(labelText + "   →");
+        button.setText(labelText);
         button.setAllCaps(false);
         button.setGravity(Gravity.CENTER);
-        button.setTextColor(BACKGROUND);
+        button.setTextColor(accent);
         button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        button.setTypeface(button.getTypeface(), Typeface.BOLD);
-        button.setBackground(surface(12, accent, accent));
+        button.setTypeface(face, Typeface.BOLD);
+        button.setBackground(surface(14, 0x00000000, accent));
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(46));
         lp.topMargin = dp(10);
         button.setLayoutParams(lp);
@@ -292,7 +320,7 @@ public class MainActivity extends Activity {
         view.setText(value);
         view.setTextSize(TypedValue.COMPLEX_UNIT_SP, sp);
         view.setTextColor(color);
-        view.setTypeface(view.getTypeface(), style);
+        view.setTypeface(face, style);
         return view;
     }
 
