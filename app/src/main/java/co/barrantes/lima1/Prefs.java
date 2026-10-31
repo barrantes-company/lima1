@@ -40,6 +40,11 @@ public final class Prefs {
         return System.currentTimeMillis() - at > 20 * 60 * 1000L;
     }
 
+    public static String tempValue(Context ctx) {
+        int value = sp(ctx).getInt("temp", EMPTY);
+        return value == EMPTY ? "—" : String.valueOf(value);
+    }
+
     public static String tempText(Context ctx, boolean withUnit) {
         int value = sp(ctx).getInt("temp", EMPTY);
         if (value == EMPTY) return withUnit ? "—°C" : "—°";

@@ -92,9 +92,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:fontFamily="@font/manrope"
-                android:text="—°C"
+                android:includeFontPadding="false"
+                android:text="—"
                 android:textColor="@color/ink"
-                android:textSize="14sp" />
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:fontFamily="@font/manrope"
+                android:includeFontPadding="false"
+                android:text="°C"
+                android:textColor="@color/ink"
+                android:textSize="9sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

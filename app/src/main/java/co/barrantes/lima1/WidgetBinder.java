@@ -53,7 +53,11 @@ public final class WidgetBinder {
         views.setOnClickPendingIntent(R.id.root, pending);
         views.setContentDescription(R.id.root, ctx.getString(description(style)));
         if (!"ccartel".equals(style)) views.setTextViewText(R.id.date, isCompact(style) ? Prefs.shortDate() : Prefs.dateLabel());
-        if (!"csenal".equals(style)) {
+        if ("senal".equals(style)) {
+            views.setTextViewText(R.id.temp, Prefs.tempValue(ctx));
+            views.setTextColor(R.id.temp, accent);
+            views.setTextColor(R.id.unit, accent);
+        } else if (!"csenal".equals(style)) {
             views.setTextViewText(R.id.temp, temp);
             views.setTextColor(R.id.temp, accent);
         }
@@ -100,7 +104,12 @@ public final class WidgetBinder {
         views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, minuteSize);
         if ("cartel".equals(style) || "centro".equals(style)) views.setTextColor(R.id.minute, 0xD6F4F4F2);
         if ("senal".equals(style)) views.setTextColor(R.id.minute, 0xA6F4F4F2);
-        views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, narrow ? 15 : 18);
+        if ("senal".equals(style)) {
+            views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, 15);
+            views.setTextViewTextSize(R.id.unit, TypedValue.COMPLEX_UNIT_SP, 9);
+        } else {
+            views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, narrow ? 15 : 18);
+        }
         views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, 12);
         views.setViewVisibility(R.id.logo, narrow ? View.GONE : View.VISIBLE);
         views.setViewVisibility(R.id.date, shortHeight ? View.GONE : View.VISIBLE);
