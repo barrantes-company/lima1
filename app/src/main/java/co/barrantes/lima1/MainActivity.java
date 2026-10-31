@@ -87,7 +87,7 @@ public class MainActivity extends Activity {
         page.addView(rule(dp(28), dp(8)));
 
         for (int i = 0; i < STYLES.length; i++) {
-            if (i == 0) page.addView(group("Compactos", "Cinco piezas de 180 × 120"));
+            if (i == 0) page.addView(group("Compactos", "Cinco piezas"));
             if (i == 5) page.addView(group("Completos", "Tres piezas amplias"));
             page.addView(section(i));
         }
@@ -261,15 +261,15 @@ public class MainActivity extends Activity {
 
     private FrameLayout preview(String style, int height) {
         boolean compact = style.startsWith("c") && !"cartel".equals(style) && !"centro".equals(style);
-        int frameHeight = compact ? dp(176) : height;
+        int frameHeight = compact ? dp(132) : height;
         FrameLayout host = new FrameLayout(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, frameHeight);
         lp.topMargin = dp(14);
         host.setLayoutParams(lp);
         try {
             View view = WidgetBinder.bind(this, style).apply(this, host);
-            int width = compact ? dp(180) : FrameLayout.LayoutParams.MATCH_PARENT;
-            host.addView(view, new FrameLayout.LayoutParams(width, frameHeight, Gravity.CENTER_HORIZONTAL));
+            host.addView(view, new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT, frameHeight));
         } catch (RuntimeException error) {
             String detail = error.getMessage();
             if (detail == null || detail.isEmpty()) detail = error.getClass().getSimpleName();

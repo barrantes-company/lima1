@@ -6,12 +6,12 @@
     android:background="@drawable/bg_widget"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="12dp">
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/mark"
         android:layout_width="2dp"
-        android:layout_height="match_parent"
+        android:layout_height="72dp"
         android:background="@color/ink"
         android:contentDescription="@null" />
 
@@ -19,11 +19,11 @@
         android:id="@+id/date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="12dp"
         android:layout_weight="1"
         android:fontFamily="@font/manrope"
         android:maxLines="1"
-        android:textColor="@color/ink"
+        android:textColor="@color/date"
         android:textSize="13sp" />
 
     <LinearLayout
@@ -35,25 +35,27 @@
         <TextClock
             android:id="@+id/hour"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:fontFamily="@font/manrope_time"
             android:fontFeatureSettings="tnum"
             android:format12Hour="h"
             android:format24Hour="H"
+            android:gravity="end|center_vertical"
             android:includeFontPadding="false"
-            android:textColor="@color/ink"
-            android:textSize="52sp" />
+            android:textColor="#FFFFFF"
+            android:textSize="48sp" />
 
         <TextClock
             android:id="@+id/minute"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
             android:fontFamily="@font/manrope_time"
             android:fontFeatureSettings="tnum"
             android:format12Hour="mm"
             android:format24Hour="mm"
+            android:gravity="end|center_vertical"
             android:includeFontPadding="false"
             android:textColor="@color/minute"
-            android:textSize="28sp" />
+            android:textSize="22sp" />
     </LinearLayout>
 </LinearLayout>

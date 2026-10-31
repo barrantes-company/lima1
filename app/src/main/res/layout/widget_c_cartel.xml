@@ -6,7 +6,7 @@
     android:background="@drawable/bg_widget"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="12dp">
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -17,40 +17,43 @@
         <TextClock
             android:id="@+id/hour"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:fontFamily="@font/manrope_time"
             android:fontFeatureSettings="tnum"
             android:format12Hour="h"
             android:format24Hour="H"
+            android:gravity="center_vertical"
             android:includeFontPadding="false"
-            android:textColor="@color/ink"
-            android:textSize="36sp" />
+            android:textColor="#FFFFFF"
+            android:textSize="48sp" />
 
         <ImageView
-            android:layout_width="28dp"
+            android:layout_width="36dp"
             android:layout_height="1dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
             android:background="#99F4F4F2"
             android:contentDescription="@null" />
 
         <TextClock
             android:id="@+id/minute"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="26dp"
             android:fontFamily="@font/manrope_time"
             android:fontFeatureSettings="tnum"
             android:format12Hour="mm"
             android:format24Hour="mm"
+            android:gravity="center_vertical"
             android:includeFontPadding="false"
             android:textColor="@color/minute"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:fontFamily="@font/manrope"
         android:text="—°"
         android:textColor="@color/ink"

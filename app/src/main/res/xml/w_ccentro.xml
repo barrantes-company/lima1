@@ -3,10 +3,10 @@
     android:description="@string/w_centro_desc"
     android:initialLayout="@layout/widget_c_centro"
     android:minWidth="180dp"
-    android:minHeight="160dp"
+    android:minHeight="120dp"
     android:previewLayout="@layout/widget_c_centro"
     android:resizeMode="horizontal|vertical"
     android:targetCellWidth="3"
-    android:targetCellHeight="3"
+    android:targetCellHeight="2"
     android:updatePeriodMillis="1800000"
     android:widgetCategory="home_screen" />

@@ -91,8 +91,8 @@ public final class WidgetBinder {
         if (isCompact(style)) {
             int pad = Math.round(8 * density);
             views.setViewPadding(R.id.root, pad, pad, pad, pad);
-            views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, 52);
-            views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, 28);
+            views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, 48);
+            views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, 22);
             views.setTextColor(R.id.hour, 0xFFFFFFFF);
             views.setTextColor(R.id.minute, 0xFF8A8B84);
             if (!"ccartel".equals(style)) views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, 13);
