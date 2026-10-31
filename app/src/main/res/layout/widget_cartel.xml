@@ -33,8 +33,8 @@
                 android:fontFamily="@font/manrope_time"
                 android:fontFeatureSettings="tnum"
                 android:letterSpacing="-0.04"
-                android:format12Hour="h"
-                android:format24Hour="H"
+                android:format12Hour="hh"
+                android:format24Hour="HH"
                 android:includeFontPadding="false"
                 android:textColor="@color/ink"
                 android:textSize="64sp" />

@@ -19,8 +19,8 @@ android {
         applicationId = "co.barrantes.lima1"
         minSdk = 26
         targetSdk = 35
-        versionCode = 9
-        versionName = "1.2.4"
+        versionCode = 10
+        versionName = "1.2.5"
     }
 
     compileOptions {

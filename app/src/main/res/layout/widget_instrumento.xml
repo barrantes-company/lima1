@@ -35,8 +35,8 @@
                 android:fontFamily="@font/manrope_time"
                 android:fontFeatureSettings="tnum"
                 android:letterSpacing="-0.03"
-                android:format12Hour="h"
-                android:format24Hour="H"
+                android:format12Hour="hh"
+                android:format24Hour="HH"
                 android:textColor="@color/ink"
                 android:textSize="58sp" />
             <LinearLayout
