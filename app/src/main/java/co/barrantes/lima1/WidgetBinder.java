@@ -83,12 +83,16 @@ public final class WidgetBinder {
         int pad = Math.round((narrow || shortHeight ? 10 : 14) * density);
         views.setViewPadding(R.id.root, pad, pad, pad, pad);
         float hourSize = narrow ? compactTime(style) : wideTime(style);
-        float minuteSize = ("cartel".equals(style) || "centro".equals(style)) ? hourSize * ("centro".equals(style) ? 0.4f : 0.88f) : hourSize;
+        float minuteSize = "senal".equals(style) ? hourSize * 0.62f : ("cartel".equals(style) || "centro".equals(style)) ? hourSize * ("centro".equals(style) ? 0.4f : 0.88f) : hourSize;
         views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, hourSize);
         views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, minuteSize);
         if ("cartel".equals(style) || "centro".equals(style)) views.setTextColor(R.id.minute, 0xD6F4F4F2);
+        if ("senal".equals(style)) {
+            views.setTextColor(R.id.minute, 0xA6F4F4F2);
+            views.setInt(R.id.mark, "setBackgroundColor", accent);
+        }
         views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, narrow ? 15 : 18);
-        views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, 12);
+        views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, "senal".equals(style) ? 16 : 12);
         views.setViewVisibility(R.id.logo, narrow ? View.GONE : View.VISIBLE);
         views.setViewVisibility(R.id.date, shortHeight ? View.GONE : View.VISIBLE);
     }
@@ -97,6 +101,7 @@ public final class WidgetBinder {
         if ("instrumento".equals(style)) return 58f;
         if ("cartel".equals(style)) return 64f;
         if ("centro".equals(style)) return 88f;
+        if ("senal".equals(style)) return 36f;
         return 72f;
     }
 
@@ -104,6 +109,7 @@ public final class WidgetBinder {
         if ("instrumento".equals(style)) return 46f;
         if ("cartel".equals(style)) return 52f;
         if ("centro".equals(style)) return 78f;
+        if ("senal".equals(style)) return 28f;
         return 56f;
     }
 
@@ -140,6 +146,6 @@ public final class WidgetBinder {
     }
 
     private static boolean hasDots(String style) {
-        return !"cartel".equals(style) && !"centro".equals(style);
+        return !"cartel".equals(style) && !"centro".equals(style) && !"senal".equals(style);
     }
 }
