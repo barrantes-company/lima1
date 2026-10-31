@@ -8,26 +8,12 @@
     android:orientation="horizontal"
     android:padding="14dp">
 
-    <ViewFlipper
+    <ImageView
+        android:id="@+id/mark"
         android:layout_width="2dp"
         android:layout_height="match_parent"
-        android:autoStart="true"
-        android:flipInterval="1100">
-
-        <ImageView
-            android:id="@+id/mark"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/ink"
-            android:contentDescription="@null" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0.25"
-            android:background="@color/ink"
-            android:contentDescription="@null" />
-    </ViewFlipper>
+        android:background="@color/ink"
+        android:contentDescription="@null" />
 
     <LinearLayout
         android:layout_width="0dp"

@@ -21,28 +21,6 @@
         android:textColor="@color/ink"
         android:textSize="52sp" />
 
-    <ViewFlipper
-        android:layout_width="40dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="3dp"
-        android:autoStart="true"
-        android:flipInterval="1600">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0.2"
-            android:background="@color/ink"
-            android:contentDescription="@null" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0.85"
-            android:background="@color/ink"
-            android:contentDescription="@null" />
-    </ViewFlipper>
-
     <TextClock
         android:id="@+id/minute"
         android:layout_width="match_parent"

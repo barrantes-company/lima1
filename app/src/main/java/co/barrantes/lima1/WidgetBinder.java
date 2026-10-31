@@ -27,7 +27,8 @@ public final class WidgetBinder {
                     new SizeF(180f, 80f), fill(ctx, style, true, true),
                     new SizeF(180f, 110f), fill(ctx, style, true, false),
                     new SizeF(250f, 80f), fill(ctx, style, false, true),
-                    new SizeF(320f, 140f), fill(ctx, style, false, false)));
+                    new SizeF(180f, 170f), fill(ctx, style, true, false),
+                    new SizeF(320f, 200f), fill(ctx, style, false, false)));
         }
         boolean narrow = false;
         boolean shortHeight = false;
@@ -90,8 +91,10 @@ public final class WidgetBinder {
         if (isCompact(style)) {
             int pad = Math.round(8 * density);
             views.setViewPadding(R.id.root, pad, pad, pad, pad);
-            views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, 36);
-            views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, 20);
+            views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, 52);
+            views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, 28);
+            views.setTextColor(R.id.hour, 0xFFFFFFFF);
+            views.setTextColor(R.id.minute, 0xFF8A8B84);
             if (!"ccartel".equals(style)) views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, 13);
             if (!"csenal".equals(style)) views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, 13);
             return;
@@ -102,8 +105,8 @@ public final class WidgetBinder {
         float minuteSize = "centro".equals(style) ? hourSize * 0.4f : hourSize * 0.58f;
         views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, hourSize);
         views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, minuteSize);
-        if ("cartel".equals(style) || "centro".equals(style)) views.setTextColor(R.id.minute, 0xD6F4F4F2);
-        if ("senal".equals(style)) views.setTextColor(R.id.minute, 0xA6F4F4F2);
+        views.setTextColor(R.id.hour, 0xFFFFFFFF);
+        views.setTextColor(R.id.minute, 0xFF8A8B84);
         if ("senal".equals(style)) {
             views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, 15);
             views.setTextViewTextSize(R.id.unit, TypedValue.COMPLEX_UNIT_SP, 9);
@@ -117,7 +120,7 @@ public final class WidgetBinder {
 
     private static float wideTime(String style) {
         if ("instrumento".equals(style)) return 58f;
-        if ("cartel".equals(style)) return 44f;
+        if ("cartel".equals(style)) return 52f;
         if ("centro".equals(style)) return 88f;
         if ("senal".equals(style)) return 52f;
         return 72f;

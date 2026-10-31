@@ -40,11 +40,11 @@ public class MainActivity extends Activity {
             "Instrumento", "Señal", "Cartel"
     };
     private static final String[] DESCRIPTIONS = {
-            "180 × 120. Hora arriba, fecha corta y grados.",
-            "180 × 120. Reloj en una línea, fecha corta abajo.",
-            "180 × 120. Hora, barra del día y fecha corta.",
-            "180 × 120. Fecha a un lado, hora al otro.",
-            "180 × 120. Hora, línea y minutos. Grados a un lado.",
+            "Caja alta. Hora arriba, fecha corta y grados.",
+            "Caja alta. Reloj en una línea, fecha corta abajo.",
+            "Caja alta. Hora, barra del día y fecha corta.",
+            "Caja alta. Fecha a un lado, hora al otro.",
+            "Caja alta. Hora, línea y minutos. Grados a un lado.",
             "El día convertido en escala, avance y temperatura.",
             "La fecha a un lado. La hora, la más grande, al otro.",
             "Hora y clima, con una línea entre la hora y los minutos."
@@ -261,7 +261,7 @@ public class MainActivity extends Activity {
 
     private FrameLayout preview(String style, int height) {
         boolean compact = style.startsWith("c") && !"cartel".equals(style) && !"centro".equals(style);
-        int frameHeight = compact ? dp(132) : height;
+        int frameHeight = compact ? dp(176) : height;
         FrameLayout host = new FrameLayout(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, frameHeight);
         lp.topMargin = dp(14);

@@ -40,26 +40,13 @@
                 android:textColor="@color/ink"
                 android:textSize="64sp" />
 
-            <ViewFlipper
+            <ImageView
                 android:layout_width="36dp"
-                android:layout_height="wrap_content"
+                android:layout_height="1dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
-                android:autoStart="true"
-                android:flipInterval="1400">
-
-                <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="1dp"
-                    android:background="#99F4F4F2"
-                    android:contentDescription="@null" />
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="1dp"
-                    android:background="#F4F4F2"
-                    android:contentDescription="@null" />
-            </ViewFlipper>
+                android:background="#99F4F4F2"
+                android:contentDescription="@null" />
 
             <TextClock
                 android:id="@+id/minute"
