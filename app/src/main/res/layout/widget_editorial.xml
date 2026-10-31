@@ -86,7 +86,7 @@
                 android:format12Hour="mm"
                 android:format24Hour="mm"
                 android:textColor="@color/ink"
-                android:textSize="72sp" />
+                android:textSize="42sp" />
         </LinearLayout>
     <TextView
         android:id="@+id/date"

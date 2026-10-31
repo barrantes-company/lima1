@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
             "La hora al centro. Los minutos, la fecha y los grados se quedan en el borde.",
             "Una lectura amplia y serena para el centro de la pantalla.",
             "El día convertido en escala, avance y temperatura.",
-            "La fecha al frente. La hora, pequeña, a un lado.",
+            "La fecha a un lado. La hora, la más grande, al otro.",
             "Hora y clima construidos como una pieza tipográfica."
     };
 

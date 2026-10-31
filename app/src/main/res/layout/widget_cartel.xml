@@ -49,7 +49,7 @@
                 android:format24Hour="mm"
                 android:includeFontPadding="false"
                 android:textColor="@color/minute"
-                android:textSize="56sp" />
+                android:textSize="37sp" />
             <TextView
                 android:id="@+id/date"
                 android:layout_width="match_parent"

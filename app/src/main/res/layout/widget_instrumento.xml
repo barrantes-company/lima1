@@ -70,7 +70,7 @@
                 android:format12Hour="mm"
                 android:format24Hour="mm"
                 android:textColor="@color/ink"
-                android:textSize="58sp" />
+                android:textSize="34sp" />
         </LinearLayout>
         <TextView android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" android:text="" />
         <LinearLayout
