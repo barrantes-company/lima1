@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_widget"
-    android:gravity="bottom"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="12dp">
 
@@ -24,7 +24,7 @@
             android:format24Hour="H"
             android:includeFontPadding="false"
             android:textColor="@color/ink"
-            android:textSize="52sp" />
+            android:textSize="36sp" />
 
         <ImageView
             android:layout_width="28dp"
@@ -44,7 +44,7 @@
             android:format24Hour="mm"
             android:includeFontPadding="false"
             android:textColor="@color/minute"
-            android:textSize="28sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
     <TextView

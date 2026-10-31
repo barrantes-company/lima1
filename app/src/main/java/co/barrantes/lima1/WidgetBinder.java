@@ -88,10 +88,10 @@ public final class WidgetBinder {
     private static void fit(Context ctx, RemoteViews views, String style, boolean narrow, boolean shortHeight) {
         float density = ctx.getResources().getDisplayMetrics().density;
         if (isCompact(style)) {
-            int pad = Math.round(12 * density);
+            int pad = Math.round(8 * density);
             views.setViewPadding(R.id.root, pad, pad, pad, pad);
-            views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, 52);
-            views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, 28);
+            views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, 36);
+            views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, 20);
             if (!"ccartel".equals(style)) views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, 13);
             if (!"csenal".equals(style)) views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, 13);
             return;
@@ -111,13 +111,13 @@ public final class WidgetBinder {
             views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, narrow ? 15 : 18);
         }
         views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, 12);
-        views.setViewVisibility(R.id.logo, narrow ? View.GONE : View.VISIBLE);
+        views.setViewVisibility(R.id.logo, "cartel".equals(style) || narrow ? View.GONE : View.VISIBLE);
         views.setViewVisibility(R.id.date, shortHeight ? View.GONE : View.VISIBLE);
     }
 
     private static float wideTime(String style) {
         if ("instrumento".equals(style)) return 58f;
-        if ("cartel".equals(style)) return 64f;
+        if ("cartel".equals(style)) return 44f;
         if ("centro".equals(style)) return 88f;
         if ("senal".equals(style)) return 52f;
         return 72f;
