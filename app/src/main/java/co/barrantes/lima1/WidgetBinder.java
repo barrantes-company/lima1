@@ -74,6 +74,7 @@ public final class WidgetBinder {
                 views.setColorStateList(R.id.day, "setProgressBackgroundTintList", ColorStateList.valueOf(0x22FFFFFF));
             }
         }
+        if ("senal".equals(style)) views.setInt(R.id.mark, "setBackgroundColor", accent);
         fit(ctx, views, style, narrow, shortHeight);
         return views;
     }
@@ -87,10 +88,7 @@ public final class WidgetBinder {
         views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, hourSize);
         views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, minuteSize);
         if ("cartel".equals(style) || "centro".equals(style)) views.setTextColor(R.id.minute, 0xD6F4F4F2);
-        if ("senal".equals(style)) {
-            views.setTextColor(R.id.minute, 0xA6F4F4F2);
-            views.setInt(R.id.mark, "setBackgroundColor", accent);
-        }
+        if ("senal".equals(style)) views.setTextColor(R.id.minute, 0xA6F4F4F2);
         views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, narrow ? 15 : 18);
         views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, "senal".equals(style) ? 16 : 12);
         views.setViewVisibility(R.id.logo, narrow ? View.GONE : View.VISIBLE);
