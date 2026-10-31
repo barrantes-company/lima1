@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_widget"
+    android:gravity="bottom"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextClock
+            android:id="@+id/hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/manrope_time"
+            android:fontFeatureSettings="tnum"
+            android:format12Hour="h"
+            android:format24Hour="H"
+            android:includeFontPadding="false"
+            android:textColor="@color/ink"
+            android:textSize="52sp" />
+
+        <View
+            android:layout_width="28dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="#99F4F4F2" />
+
+        <TextClock
+            android:id="@+id/minute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/manrope_time"
+            android:fontFeatureSettings="tnum"
+            android:format12Hour="mm"
+            android:format24Hour="mm"
+            android:includeFontPadding="false"
+            android:textColor="@color/minute"
+            android:textSize="28sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/manrope"
+        android:text="—°"
+        android:textColor="@color/ink"
+        android:textSize="13sp" />
+</LinearLayout>

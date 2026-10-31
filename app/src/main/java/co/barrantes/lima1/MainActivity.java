@@ -28,14 +28,23 @@ public class MainActivity extends Activity {
     private static final int SURFACE = 0xD91A1B16;
     private static final int BACKGROUND = 0xFF12130F;
 
-    private static final String[] STYLES = {"centro", "editorial", "instrumento", "senal", "cartel"};
-    private static final String[] NAMES = {"Centro", "Editorial", "Instrumento", "Señal", "Cartel"};
+    private static final String[] STYLES = {
+            "ccentro", "ceditorial", "cinstrumento", "csenal", "ccartel",
+            "instrumento", "senal", "cartel"
+    };
+    private static final String[] NAMES = {
+            "Centro compacto", "Editorial compacto", "Instrumento compacto", "Señal compacto", "Cartel compacto",
+            "Instrumento", "Señal", "Cartel"
+    };
     private static final String[] DESCRIPTIONS = {
-            "La hora al centro. Los minutos, la fecha y los grados se quedan en el borde.",
-            "Una lectura amplia y serena para el centro de la pantalla.",
+            "180 × 120. Hora arriba, fecha corta y grados.",
+            "180 × 120. Reloj en una línea, fecha corta abajo.",
+            "180 × 120. Hora, barra del día y fecha corta.",
+            "180 × 120. Fecha a un lado, hora al otro.",
+            "180 × 120. Hora, línea y minutos. Grados a un lado.",
             "El día convertido en escala, avance y temperatura.",
             "La fecha a un lado. La hora, la más grande, al otro.",
-            "Hora y clima construidos como una pieza tipográfica."
+            "Hora y clima, con una línea entre la hora y los minutos."
     };
 
     @Override
@@ -71,7 +80,7 @@ public class MainActivity extends Activity {
         page.setPadding(side, dp(22), side, dp(52));
         page.addView(masthead());
         page.addView(rule(dp(30), dp(26)));
-        page.addView(label("COLECCIÓN 01  /  CINCO FORMAS DE LEER EL DÍA", MUTED));
+        page.addView(label("COLECCIÓN 01  /  OCHO PIEZAS", MUTED));
 
         for (int i = 0; i < STYLES.length; i++) {
             page.addView(section(i));
@@ -114,7 +123,7 @@ public class MainActivity extends Activity {
         LinearLayout facts = new LinearLayout(this);
         facts.setOrientation(LinearLayout.HORIZONTAL);
         facts.setPadding(0, dp(28), 0, 0);
-        facts.addView(fact("05", "DISEÑOS"), new LinearLayout.LayoutParams(0, dp(58), 1));
+        facts.addView(fact("08", "DISEÑOS"), new LinearLayout.LayoutParams(0, dp(58), 1));
         LinearLayout.LayoutParams second = new LinearLayout.LayoutParams(0, dp(58), 1);
         second.setMarginStart(dp(10));
         facts.addView(fact("03", "PALETAS"), second);
@@ -321,6 +330,11 @@ public class MainActivity extends Activity {
 
     private static String widgetName(String style) {
         return switch (style) {
+            case "cinstrumento" -> "Instrumento compacto";
+            case "csenal" -> "Señal compacto";
+            case "ccartel" -> "Cartel compacto";
+            case "ccentro" -> "Centro compacto";
+            case "ceditorial" -> "Editorial compacto";
             case "instrumento" -> "Instrumento";
             case "senal" -> "Señal";
             case "cartel" -> "Cartel";
@@ -330,15 +344,23 @@ public class MainActivity extends Activity {
     }
 
     private static String styleOf(Class<?> type) {
+        if (type == CInstrumentoWidget.class) return "cinstrumento";
+        if (type == CSenalWidget.class) return "csenal";
+        if (type == CCartelWidget.class) return "ccartel";
         if (type == InstrumentoWidget.class) return "instrumento";
         if (type == SenalWidget.class) return "senal";
         if (type == CartelWidget.class) return "cartel";
-        if (type == CentroWidget.class) return "centro";
-        return "editorial";
+        if (type == CentroWidget.class) return "ccentro";
+        return "ceditorial";
     }
 
     private static Class<?> homeClass(String style) {
         return switch (style) {
+            case "cinstrumento" -> CInstrumentoWidget.class;
+            case "csenal" -> CSenalWidget.class;
+            case "ccartel" -> CCartelWidget.class;
+            case "ccentro" -> CentroWidget.class;
+            case "ceditorial" -> EditorialWidget.class;
             case "instrumento" -> InstrumentoWidget.class;
             case "senal" -> SenalWidget.class;
             case "cartel" -> CartelWidget.class;

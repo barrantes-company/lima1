@@ -52,9 +52,11 @@ public final class WidgetBinder {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         views.setOnClickPendingIntent(R.id.root, pending);
         views.setContentDescription(R.id.root, ctx.getString(description(style)));
-        views.setTextViewText(R.id.date, Prefs.dateLabel());
-        views.setTextViewText(R.id.temp, temp);
-        views.setTextColor(R.id.temp, accent);
+        if (!"ccartel".equals(style)) views.setTextViewText(R.id.date, isCompact(style) ? Prefs.shortDate() : Prefs.dateLabel());
+        if (!"csenal".equals(style)) {
+            views.setTextViewText(R.id.temp, temp);
+            views.setTextColor(R.id.temp, accent);
+        }
         if (hasUnit(style)) views.setTextColor(R.id.unit, accent);
         if (hasSun(style)) {
             int code = Prefs.weatherCode(ctx);
@@ -67,20 +69,29 @@ public final class WidgetBinder {
             views.setInt(R.id.dot1, "setColorFilter", accent);
             views.setInt(R.id.dot2, "setColorFilter", accent);
         }
-        if ("instrumento".equals(style)) {
+        if ("instrumento".equals(style) || "cinstrumento".equals(style)) {
             views.setProgressBar(R.id.day, 100, Prefs.dayProgress(), false);
             if (Build.VERSION.SDK_INT >= 31) {
                 views.setColorStateList(R.id.day, "setProgressTintList", ColorStateList.valueOf(accent));
                 views.setColorStateList(R.id.day, "setProgressBackgroundTintList", ColorStateList.valueOf(0x22FFFFFF));
             }
         }
-        if ("senal".equals(style)) views.setInt(R.id.mark, "setBackgroundColor", accent);
+        if ("senal".equals(style) || "csenal".equals(style)) views.setInt(R.id.mark, "setBackgroundColor", accent);
         fit(ctx, views, style, narrow, shortHeight);
         return views;
     }
 
     private static void fit(Context ctx, RemoteViews views, String style, boolean narrow, boolean shortHeight) {
         float density = ctx.getResources().getDisplayMetrics().density;
+        if (isCompact(style)) {
+            int pad = Math.round(12 * density);
+            views.setViewPadding(R.id.root, pad, pad, pad, pad);
+            views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, 52);
+            views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, 28);
+            if (!"ccartel".equals(style)) views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, 13);
+            if (!"csenal".equals(style)) views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, 13);
+            return;
+        }
         int pad = Math.round((narrow || shortHeight ? 10 : 14) * density);
         views.setViewPadding(R.id.root, pad, pad, pad, pad);
         float hourSize = narrow ? compactTime(style) : wideTime(style);
@@ -113,6 +124,11 @@ public final class WidgetBinder {
 
     private static int description(String style) {
         return switch (style) {
+            case "cinstrumento" -> R.string.w_cinstrumento_desc;
+            case "csenal" -> R.string.w_csenal_desc;
+            case "ccartel" -> R.string.w_ccartel_desc;
+            case "ccentro" -> R.string.w_centro_desc;
+            case "ceditorial" -> R.string.w_editorial_desc;
             case "instrumento" -> R.string.w_instrumento_desc;
             case "senal" -> R.string.w_senal_desc;
             case "cartel" -> R.string.w_cartel_desc;
@@ -123,6 +139,11 @@ public final class WidgetBinder {
 
     private static int layout(String style) {
         return switch (style) {
+            case "cinstrumento" -> R.layout.widget_c_instrumento;
+            case "csenal" -> R.layout.widget_c_senal;
+            case "ccartel" -> R.layout.widget_c_cartel;
+            case "ccentro" -> R.layout.widget_c_centro;
+            case "ceditorial" -> R.layout.widget_c_editorial;
             case "instrumento" -> R.layout.widget_instrumento;
             case "senal" -> R.layout.widget_senal;
             case "cartel" -> R.layout.widget_cartel;
@@ -140,10 +161,14 @@ public final class WidgetBinder {
     }
 
     private static boolean hasSun(String style) {
-        return true;
+        return !isCompact(style);
     }
 
     private static boolean hasDots(String style) {
-        return !"cartel".equals(style) && !"centro".equals(style) && !"senal".equals(style);
+        return "ceditorial".equals(style) || "cinstrumento".equals(style) || "editorial".equals(style) || "instrumento".equals(style);
+    }
+
+    private static boolean isCompact(String style) {
+        return style.startsWith("c") && !"cartel".equals(style) && !"centro".equals(style);
     }
 }

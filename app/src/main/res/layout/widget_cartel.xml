@@ -38,6 +38,14 @@
                 android:includeFontPadding="false"
                 android:textColor="@color/ink"
                 android:textSize="64sp" />
+
+            <View
+                android:layout_width="36dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="#99F4F4F2" />
+
             <TextClock
                 android:id="@+id/minute"
                 android:layout_width="wrap_content"

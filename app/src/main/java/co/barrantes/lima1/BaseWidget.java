@@ -24,6 +24,9 @@ public abstract class BaseWidget extends AppWidgetProvider {
 
     public static void push(Context context) {
         push(context, EditorialWidget.class);
+        push(context, CInstrumentoWidget.class);
+        push(context, CSenalWidget.class);
+        push(context, CCartelWidget.class);
         push(context, InstrumentoWidget.class);
         push(context, SenalWidget.class);
         push(context, CartelWidget.class);

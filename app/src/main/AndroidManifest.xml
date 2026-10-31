@@ -25,7 +25,25 @@
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/w_editorial" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/w_ceditorial" />
+        </receiver>
+        <receiver android:name=".CInstrumentoWidget" android:exported="true" android:label="@string/w_cinstrumento">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/w_cinstrumento" />
+        </receiver>
+        <receiver android:name=".CSenalWidget" android:exported="true" android:label="@string/w_csenal">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/w_csenal" />
+        </receiver>
+        <receiver android:name=".CCartelWidget" android:exported="true" android:label="@string/w_ccartel">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/w_ccartel" />
         </receiver>
         <receiver android:name=".InstrumentoWidget" android:exported="true" android:label="@string/w_instrumento">
             <intent-filter>
@@ -43,7 +61,7 @@
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/w_centro" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/w_ccentro" />
         </receiver>
         <receiver android:name=".CartelWidget" android:exported="true" android:label="@string/w_cartel">
             <intent-filter>

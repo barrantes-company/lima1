@@ -54,6 +54,11 @@ public final class Prefs {
         return sp(ctx).getBoolean("day", true);
     }
 
+    public static String shortDate() {
+        String raw = new SimpleDateFormat("EEE d MMM", new Locale("es", "PE")).format(new Date());
+        return raw.toLowerCase(new Locale("es", "PE")).replace(".", "");
+    }
+
     public static String dateLabel() {
         String raw = new SimpleDateFormat("EEEE, d 'de' MMMM 'de' yyyy", new Locale("es", "PE")).format(new Date());
         if (raw.isEmpty()) return raw;
