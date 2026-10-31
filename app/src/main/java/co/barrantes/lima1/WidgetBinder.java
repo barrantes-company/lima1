@@ -56,7 +56,13 @@ public final class WidgetBinder {
         views.setTextViewText(R.id.temp, temp);
         views.setTextColor(R.id.temp, accent);
         if (hasUnit(style)) views.setTextColor(R.id.unit, accent);
-        if (hasSun(style)) views.setInt(R.id.sun, "setColorFilter", accent);
+        if (hasSun(style)) {
+            int code = Prefs.weatherCode(ctx);
+            boolean day = Prefs.isDay(ctx);
+            views.setImageViewResource(R.id.sun, WeatherIcon.drawable(code, day));
+            views.setInt(R.id.sun, "setColorFilter", accent);
+            views.setContentDescription(R.id.sun, WeatherIcon.label(code, day));
+        }
         if (hasDots(style)) {
             views.setInt(R.id.dot1, "setColorFilter", accent);
             views.setInt(R.id.dot2, "setColorFilter", accent);
@@ -126,7 +132,7 @@ public final class WidgetBinder {
     }
 
     private static boolean hasSun(String style) {
-        return !"instrumento".equals(style);
+        return true;
     }
 
     private static boolean hasDots(String style) {

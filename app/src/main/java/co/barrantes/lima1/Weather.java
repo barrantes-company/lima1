@@ -27,7 +27,7 @@ public final class Weather {
                 double[] point = location(app);
                 if (point == null) point = ip();
                 if (point != null) {
-                    Prefs.setTemp(app, meteo(point[0], point[1]));
+                    meteo(app, point[0], point[1]);
                     BaseWidget.push(app);
                 }
             } catch (Exception ignored) {
@@ -70,10 +70,15 @@ public final class Weather {
         }
     }
 
-    private static int meteo(double lat, double lon) throws Exception {
-        String url = "https://api.open-meteo.com/v1/forecast?latitude=" + lat + "&longitude=" + lon + "&current=temperature_2m";
-        JSONObject json = new JSONObject(get(url));
-        return Math.round((float) json.getJSONObject("current").getDouble("temperature_2m"));
+    private static void meteo(Context ctx, double lat, double lon) throws Exception {
+        String url = "https://api.open-meteo.com/v1/forecast?latitude=" + lat
+                + "&longitude=" + lon
+                + "&current=temperature_2m,weather_code,is_day";
+        JSONObject current = new JSONObject(get(url)).getJSONObject("current");
+        int celsius = Math.round((float) current.getDouble("temperature_2m"));
+        int code = current.getInt("weather_code");
+        boolean day = current.optInt("is_day", 1) == 1;
+        Prefs.setReading(ctx, celsius, code, day);
     }
 
     private static String get(String url) throws Exception {

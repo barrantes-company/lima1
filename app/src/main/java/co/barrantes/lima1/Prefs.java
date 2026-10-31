@@ -26,8 +26,13 @@ public final class Prefs {
         sp(ctx).edit().putString("palette_" + style, palette).apply();
     }
 
-    public static void setTemp(Context ctx, int celsius) {
-        sp(ctx).edit().putInt("temp", celsius).putLong("temp_at", System.currentTimeMillis()).apply();
+    public static void setReading(Context ctx, int celsius, int code, boolean day) {
+        sp(ctx).edit()
+                .putInt("temp", celsius)
+                .putInt("code", code)
+                .putBoolean("day", day)
+                .putLong("temp_at", System.currentTimeMillis())
+                .apply();
     }
 
     public static boolean tempStale(Context ctx) {
@@ -41,8 +46,16 @@ public final class Prefs {
         return withUnit ? value + "°C" : value + "°";
     }
 
+    public static int weatherCode(Context ctx) {
+        return sp(ctx).getInt("code", 0);
+    }
+
+    public static boolean isDay(Context ctx) {
+        return sp(ctx).getBoolean("day", true);
+    }
+
     public static String dateLabel() {
-        String raw = new SimpleDateFormat("EEEE, d 'de' MMMM", new Locale("es", "PE")).format(new Date());
+        String raw = new SimpleDateFormat("EEEE, d 'de' MMMM 'de' yyyy", new Locale("es", "PE")).format(new Date());
         if (raw.isEmpty()) return raw;
         return Character.toUpperCase(raw.charAt(0)) + raw.substring(1);
     }
