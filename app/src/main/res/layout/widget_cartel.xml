@@ -39,12 +39,13 @@
                 android:textColor="@color/ink"
                 android:textSize="64sp" />
 
-            <View
+            <ImageView
                 android:layout_width="36dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
-                android:background="#99F4F4F2" />
+                android:background="#99F4F4F2"
+                android:contentDescription="@null" />
 
             <TextClock
                 android:id="@+id/minute"
