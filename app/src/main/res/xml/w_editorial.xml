@@ -6,7 +6,7 @@
     android:minHeight="110dp"
     android:minResizeWidth="180dp"
     android:minResizeHeight="80dp"
-    android:maxResizeHeight="320dp"
+    android:maxResizeHeight="140dp"
     android:previewLayout="@layout/widget_editorial"
     android:resizeMode="horizontal|vertical"
     android:targetCellWidth="4"

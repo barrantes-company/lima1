@@ -11,7 +11,7 @@
     <TextClock
         android:id="@+id/hour"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="58dp"
         android:fontFamily="@font/manrope_time"
         android:fontFeatureSettings="tnum"
         android:format12Hour="h"

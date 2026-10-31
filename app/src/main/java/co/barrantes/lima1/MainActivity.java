@@ -261,7 +261,7 @@ public class MainActivity extends Activity {
 
     private FrameLayout preview(String style, int height) {
         boolean compact = style.startsWith("c") && !"cartel".equals(style) && !"centro".equals(style);
-        int frameHeight = compact ? dp(156) : height;
+        int frameHeight = compact ? dp(128) : height;
         FrameLayout host = new FrameLayout(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, frameHeight);
         lp.topMargin = dp(14);

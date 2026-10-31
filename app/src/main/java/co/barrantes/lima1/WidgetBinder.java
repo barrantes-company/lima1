@@ -28,12 +28,10 @@ public final class WidgetBinder {
     public static RemoteViews bind(Context ctx, String style, Bundle options) {
         if (Build.VERSION.SDK_INT >= 31) {
             return new RemoteViews(Map.of(
-                    new SizeF(110f, 80f), fill(ctx, style, true, SHORT),
-                    new SizeF(220f, 80f), fill(ctx, style, false, SHORT),
-                    new SizeF(110f, 150f), fill(ctx, style, true, NORMAL),
-                    new SizeF(220f, 150f), fill(ctx, style, false, NORMAL),
-                    new SizeF(110f, 210f), fill(ctx, style, true, TALL),
-                    new SizeF(250f, 210f), fill(ctx, style, false, TALL)));
+                    new SizeF(110f, 100f), fill(ctx, style, true, SHORT),
+                    new SizeF(220f, 100f), fill(ctx, style, false, SHORT),
+                    new SizeF(110f, 130f), fill(ctx, style, true, NORMAL),
+                    new SizeF(220f, 130f), fill(ctx, style, false, NORMAL)));
         }
         boolean narrow = true;
         int mode = NORMAL;
@@ -41,7 +39,7 @@ public final class WidgetBinder {
             int width = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 220);
             int height = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 150);
             narrow = width < 220;
-            mode = height < 140 ? SHORT : height < 200 ? NORMAL : TALL;
+            mode = height < 125 ? SHORT : NORMAL;
         }
         return fill(ctx, style, narrow, mode);
     }
@@ -94,10 +92,10 @@ public final class WidgetBinder {
     private static void fit(Context ctx, RemoteViews views, String style, boolean narrow, int mode) {
         float density = ctx.getResources().getDisplayMetrics().density;
         boolean compact = isCompact(style);
-        int pad = Math.round((compact ? 14 : narrow || mode == SHORT ? 12 : 16) * density);
+        int pad = Math.round(10 * density);
         views.setViewPadding(R.id.root, pad, pad, pad, pad);
-        float hourSize = compact ? (mode == SHORT ? 52f : 48f) : (narrow ? compactTime(style) : wideTime(style));
-        float minuteSize = compact ? 22f : "centro".equals(style) ? hourSize * 0.4f : hourSize * 0.58f;
+        float hourSize = compact ? 56f : (narrow ? compactTime(style) : wideTime(style));
+        float minuteSize = compact ? 26f : "centro".equals(style) ? hourSize * 0.4f : hourSize * 0.5f;
         views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, hourSize);
         views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, minuteSize);
         views.setTextColor(R.id.hour, 0xFFFFFFFF);
@@ -120,11 +118,11 @@ public final class WidgetBinder {
     }
 
     private static float wideTime(String style) {
-        if ("instrumento".equals(style)) return 58f;
+        if ("instrumento".equals(style)) return 52f;
         if ("cartel".equals(style)) return 52f;
-        if ("centro".equals(style)) return 88f;
-        if ("senal".equals(style)) return 52f;
-        return 72f;
+        if ("centro".equals(style)) return 64f;
+        if ("senal".equals(style)) return 48f;
+        return 56f;
     }
 
     private static float compactTime(String style) {
