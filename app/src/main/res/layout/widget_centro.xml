@@ -41,41 +41,36 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <LinearLayout
+    <TextClock
+        android:id="@+id/hour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:fontFamily="@font/manrope_time"
+        android:fontFeatureSettings="tnum"
+        android:format12Hour="h"
+        android:format24Hour="H"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:letterSpacing="-0.03"
+        android:textColor="@color/ink"
+        android:textSize="68sp" />
 
-        <TextClock
-            android:id="@+id/hour"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/manrope_time"
-            android:fontFeatureSettings="tnum"
-            android:format12Hour="h"
-            android:format24Hour="H"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:letterSpacing="-0.03"
-            android:textColor="@color/ink"
-            android:textSize="68sp" />
-
-        <TextClock
-            android:id="@+id/minute"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/manrope_time"
-            android:fontFeatureSettings="tnum"
-            android:format12Hour="mm"
-            android:format24Hour="mm"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:letterSpacing="-0.02"
-            android:textColor="@color/minute"
-            android:textSize="36sp" />
-    </LinearLayout>
+    <TextClock
+        android:id="@+id/minute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="56dp"
+        android:fontFamily="@font/manrope_time"
+        android:fontFeatureSettings="tnum"
+        android:format12Hour="mm"
+        android:format24Hour="mm"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:letterSpacing="-0.02"
+        android:textColor="@color/minute"
+        android:textSize="36sp" />
 
     <TextView
         android:id="@+id/date"
