@@ -83,10 +83,10 @@ public final class WidgetBinder {
         int pad = Math.round((narrow || shortHeight ? 10 : 14) * density);
         views.setViewPadding(R.id.root, pad, pad, pad, pad);
         float hourSize = narrow ? compactTime(style) : wideTime(style);
-        float minuteSize = "cartel".equals(style) ? hourSize * 0.88f : hourSize;
+        float minuteSize = ("cartel".equals(style) || "centro".equals(style)) ? hourSize * ("centro".equals(style) ? 0.56f : 0.88f) : hourSize;
         views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, hourSize);
         views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, minuteSize);
-        if ("cartel".equals(style)) views.setTextColor(R.id.minute, 0xD6F4F4F2);
+        if ("cartel".equals(style) || "centro".equals(style)) views.setTextColor(R.id.minute, 0xD6F4F4F2);
         views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, narrow ? 15 : 18);
         views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, 12);
         views.setViewVisibility(R.id.logo, narrow ? View.GONE : View.VISIBLE);
@@ -96,12 +96,14 @@ public final class WidgetBinder {
     private static float wideTime(String style) {
         if ("instrumento".equals(style)) return 58f;
         if ("cartel".equals(style)) return 64f;
+        if ("centro".equals(style)) return 68f;
         return 72f;
     }
 
     private static float compactTime(String style) {
         if ("instrumento".equals(style)) return 46f;
         if ("cartel".equals(style)) return 52f;
+        if ("centro".equals(style)) return 40f;
         return 56f;
     }
 
@@ -110,6 +112,7 @@ public final class WidgetBinder {
             case "instrumento" -> R.string.w_instrumento_desc;
             case "senal" -> R.string.w_senal_desc;
             case "cartel" -> R.string.w_cartel_desc;
+            case "centro" -> R.string.w_centro_desc;
             default -> R.string.w_editorial_desc;
         };
     }
@@ -119,6 +122,7 @@ public final class WidgetBinder {
             case "instrumento" -> R.layout.widget_instrumento;
             case "senal" -> R.layout.widget_senal;
             case "cartel" -> R.layout.widget_cartel;
+            case "centro" -> R.layout.widget_centro;
             default -> R.layout.widget_editorial;
         };
     }
@@ -136,6 +140,6 @@ public final class WidgetBinder {
     }
 
     private static boolean hasDots(String style) {
-        return !"cartel".equals(style);
+        return !"cartel".equals(style) && !"centro".equals(style);
     }
 }

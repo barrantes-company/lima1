@@ -28,9 +28,10 @@ public class MainActivity extends Activity {
     private static final int SURFACE = 0xD91A1B16;
     private static final int BACKGROUND = 0xFF12130F;
 
-    private static final String[] STYLES = {"editorial", "instrumento", "senal", "cartel"};
-    private static final String[] NAMES = {"Editorial", "Instrumento", "Señal", "Cartel"};
+    private static final String[] STYLES = {"centro", "editorial", "instrumento", "senal", "cartel"};
+    private static final String[] NAMES = {"Centro", "Editorial", "Instrumento", "Señal", "Cartel"};
     private static final String[] DESCRIPTIONS = {
+            "La hora al centro. Los minutos, la fecha y los grados se quedan en el borde.",
             "Una lectura amplia y serena para el centro de la pantalla.",
             "El día convertido en escala, avance y temperatura.",
             "Información esencial con una presencia casi silenciosa.",
@@ -70,7 +71,7 @@ public class MainActivity extends Activity {
         page.setPadding(side, dp(22), side, dp(52));
         page.addView(masthead());
         page.addView(rule(dp(30), dp(26)));
-        page.addView(label("COLECCIÓN 01  /  CUATRO FORMAS DE LEER EL DÍA", MUTED));
+        page.addView(label("COLECCIÓN 01  /  CINCO FORMAS DE LEER EL DÍA", MUTED));
 
         for (int i = 0; i < STYLES.length; i++) {
             page.addView(section(i));
@@ -113,7 +114,7 @@ public class MainActivity extends Activity {
         LinearLayout facts = new LinearLayout(this);
         facts.setOrientation(LinearLayout.HORIZONTAL);
         facts.setPadding(0, dp(28), 0, 0);
-        facts.addView(fact("04", "DISEÑOS"), new LinearLayout.LayoutParams(0, dp(58), 1));
+        facts.addView(fact("05", "DISEÑOS"), new LinearLayout.LayoutParams(0, dp(58), 1));
         LinearLayout.LayoutParams second = new LinearLayout.LayoutParams(0, dp(58), 1);
         second.setMarginStart(dp(10));
         facts.addView(fact("03", "PALETAS"), second);
@@ -323,6 +324,7 @@ public class MainActivity extends Activity {
             case "instrumento" -> "Instrumento";
             case "senal" -> "Señal";
             case "cartel" -> "Cartel";
+            case "centro" -> "Centro";
             default -> "Editorial";
         };
     }
@@ -331,6 +333,7 @@ public class MainActivity extends Activity {
         if (type == InstrumentoWidget.class) return "instrumento";
         if (type == SenalWidget.class) return "senal";
         if (type == CartelWidget.class) return "cartel";
+        if (type == CentroWidget.class) return "centro";
         return "editorial";
     }
 
@@ -339,6 +342,7 @@ public class MainActivity extends Activity {
             case "instrumento" -> InstrumentoWidget.class;
             case "senal" -> SenalWidget.class;
             case "cartel" -> CartelWidget.class;
+            case "centro" -> CentroWidget.class;
             default -> EditorialWidget.class;
         };
     }

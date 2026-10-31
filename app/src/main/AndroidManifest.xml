@@ -39,6 +39,12 @@
             </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/w_senal" />
         </receiver>
+        <receiver android:name=".CentroWidget" android:exported="true" android:label="@string/w_centro">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/w_centro" />
+        </receiver>
         <receiver android:name=".CartelWidget" android:exported="true" android:label="@string/w_cartel">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_widget"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:alpha="0.22"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="" />
+
+        <ImageView
+            android:id="@+id/sun"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:contentDescription="@string/temp"
+            android:src="@drawable/ic_sun" />
+
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:fontFamily="@font/manrope"
+            android:text="—°"
+            android:textColor="@color/ink"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <TextClock
+        android:id="@+id/hour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/manrope_time"
+        android:fontFeatureSettings="tnum"
+        android:format12Hour="h"
+        android:format24Hour="H"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:letterSpacing="-0.03"
+        android:textColor="@color/ink"
+        android:textSize="68sp" />
+
+    <TextClock
+        android:id="@+id/minute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/manrope_time"
+        android:fontFeatureSettings="tnum"
+        android:format12Hour="mm"
+        android:format24Hour="mm"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:letterSpacing="-0.02"
+        android:textColor="@color/minute"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/manrope"
+        android:gravity="center"
+        android:letterSpacing="0.02"
+        android:maxLines="2"
+        android:textColor="@color/date"
+        android:textSize="12sp" />
+
+</LinearLayout>
