@@ -81,11 +81,17 @@ public final class WidgetBinder {
     private static void fit(Context ctx, RemoteViews views, String style, boolean narrow, boolean shortHeight) {
         float density = ctx.getResources().getDisplayMetrics().density;
         int pad = Math.round((narrow || shortHeight ? 10 : 14) * density);
-        views.setViewPadding(R.id.root, pad, pad, pad, pad);
+        if ("centro".equals(style)) views.setViewPadding(R.id.root, pad, 0, pad, pad);
+        else views.setViewPadding(R.id.root, pad, pad, pad, pad);
         float hourSize = narrow ? compactTime(style) : wideTime(style);
-        float minuteSize = ("cartel".equals(style) || "centro".equals(style)) ? hourSize * ("centro".equals(style) ? 0.56f : 0.88f) : hourSize;
+        float minuteSize = ("cartel".equals(style) || "centro".equals(style)) ? hourSize * ("centro".equals(style) ? 0.42f : 0.88f) : hourSize;
         views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, hourSize);
         views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, minuteSize);
+        if ("centro".equals(style) && Build.VERSION.SDK_INT >= 31) {
+            float shift = 0.2f * hourSize * ctx.getResources().getDisplayMetrics().scaledDensity;
+            views.setFloat(R.id.hour, "setTranslationY", -shift);
+            views.setViewLayoutMargin(R.id.minute, RemoteViews.MARGIN_TOP, Math.round(hourSize * 0.68f), TypedValue.COMPLEX_UNIT_SP);
+        }
         if ("cartel".equals(style) || "centro".equals(style)) views.setTextColor(R.id.minute, 0xD6F4F4F2);
         views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, narrow ? 15 : 18);
         views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, 12);
@@ -96,14 +102,14 @@ public final class WidgetBinder {
     private static float wideTime(String style) {
         if ("instrumento".equals(style)) return 58f;
         if ("cartel".equals(style)) return 64f;
-        if ("centro".equals(style)) return 68f;
+        if ("centro".equals(style)) return 104f;
         return 72f;
     }
 
     private static float compactTime(String style) {
         if ("instrumento".equals(style)) return 46f;
         if ("cartel".equals(style)) return 52f;
-        if ("centro".equals(style)) return 40f;
+        if ("centro".equals(style)) return 78f;
         return 56f;
     }
 

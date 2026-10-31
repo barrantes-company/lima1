@@ -4,7 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_widget"
-    android:padding="14dp">
+    android:paddingStart="14dp"
+    android:paddingEnd="14dp"
+    android:paddingBottom="14dp"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
     <ImageView
         android:id="@+id/logo"
@@ -45,7 +49,8 @@
         android:id="@+id/hour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="top|center_horizontal"
+        android:translationY="-21dp"
         android:fontFamily="@font/manrope_time"
         android:fontFeatureSettings="tnum"
         android:format12Hour="h"
@@ -54,14 +59,14 @@
         android:includeFontPadding="false"
         android:letterSpacing="-0.03"
         android:textColor="@color/ink"
-        android:textSize="68sp" />
+        android:textSize="104sp" />
 
     <TextClock
         android:id="@+id/minute"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="56dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="86dp"
         android:fontFamily="@font/manrope_time"
         android:fontFeatureSettings="tnum"
         android:format12Hour="mm"
