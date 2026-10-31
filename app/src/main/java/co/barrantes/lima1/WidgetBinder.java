@@ -17,31 +17,36 @@ import java.util.Map;
 public final class WidgetBinder {
     private WidgetBinder() {}
 
+    private static final int SHORT = 0;
+    private static final int NORMAL = 1;
+    private static final int TALL = 2;
+
     public static RemoteViews bind(Context ctx, String style) {
-        return fill(ctx, style, false, false);
+        return fill(ctx, style, false, NORMAL);
     }
 
     public static RemoteViews bind(Context ctx, String style, Bundle options) {
         if (Build.VERSION.SDK_INT >= 31) {
             return new RemoteViews(Map.of(
-                    new SizeF(180f, 80f), fill(ctx, style, true, true),
-                    new SizeF(180f, 110f), fill(ctx, style, true, false),
-                    new SizeF(250f, 80f), fill(ctx, style, false, true),
-                    new SizeF(180f, 170f), fill(ctx, style, true, false),
-                    new SizeF(320f, 200f), fill(ctx, style, false, false)));
+                    new SizeF(110f, 80f), fill(ctx, style, true, SHORT),
+                    new SizeF(220f, 80f), fill(ctx, style, false, SHORT),
+                    new SizeF(110f, 150f), fill(ctx, style, true, NORMAL),
+                    new SizeF(220f, 150f), fill(ctx, style, false, NORMAL),
+                    new SizeF(110f, 210f), fill(ctx, style, true, TALL),
+                    new SizeF(250f, 210f), fill(ctx, style, false, TALL)));
         }
-        boolean narrow = false;
-        boolean shortHeight = false;
+        boolean narrow = true;
+        int mode = NORMAL;
         if (options != null) {
-            int width = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 320);
-            int height = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 140);
-            narrow = width < 230;
-            shortHeight = height < 105;
+            int width = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 220);
+            int height = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 150);
+            narrow = width < 220;
+            mode = height < 140 ? SHORT : height < 200 ? NORMAL : TALL;
         }
-        return fill(ctx, style, narrow, shortHeight);
+        return fill(ctx, style, narrow, mode);
     }
 
-    private static RemoteViews fill(Context ctx, String style, boolean narrow, boolean shortHeight) {
+    private static RemoteViews fill(Context ctx, String style, boolean narrow, int mode) {
         RemoteViews views = new RemoteViews(ctx.getPackageName(), layout(style));
         int accent = Palette.color(Prefs.palette(ctx, style));
         String temp = Prefs.tempText(ctx, usesUnit(style));
@@ -82,40 +87,36 @@ public final class WidgetBinder {
             }
         }
         if ("senal".equals(style) || "csenal".equals(style)) views.setInt(R.id.mark, "setBackgroundColor", accent);
-        fit(ctx, views, style, narrow, shortHeight);
+        fit(ctx, views, style, narrow, mode);
         return views;
     }
 
-    private static void fit(Context ctx, RemoteViews views, String style, boolean narrow, boolean shortHeight) {
+    private static void fit(Context ctx, RemoteViews views, String style, boolean narrow, int mode) {
         float density = ctx.getResources().getDisplayMetrics().density;
-        if (isCompact(style)) {
-            int pad = Math.round(8 * density);
-            views.setViewPadding(R.id.root, pad, pad, pad, pad);
-            views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, 48);
-            views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, 22);
-            views.setTextColor(R.id.hour, 0xFFFFFFFF);
-            views.setTextColor(R.id.minute, 0xFF8A8B84);
-            if (!"ccartel".equals(style)) views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, 13);
-            if (!"csenal".equals(style)) views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, 13);
-            return;
-        }
-        int pad = Math.round((narrow || shortHeight ? 10 : 14) * density);
+        boolean compact = isCompact(style);
+        int pad = Math.round((compact ? 14 : narrow || mode == SHORT ? 12 : 16) * density);
         views.setViewPadding(R.id.root, pad, pad, pad, pad);
-        float hourSize = narrow ? compactTime(style) : wideTime(style);
-        float minuteSize = "centro".equals(style) ? hourSize * 0.4f : hourSize * 0.58f;
+        float hourSize = compact ? (mode == SHORT ? 52f : 48f) : (narrow ? compactTime(style) : wideTime(style));
+        float minuteSize = compact ? 22f : "centro".equals(style) ? hourSize * 0.4f : hourSize * 0.58f;
         views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, hourSize);
         views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, minuteSize);
         views.setTextColor(R.id.hour, 0xFFFFFFFF);
         views.setTextColor(R.id.minute, 0xFF8A8B84);
+        if (hasDate(style)) views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, compact ? 13 : 12);
+        if (hasTemp(style) && !"senal".equals(style)) {
+            views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, compact ? 13 : narrow ? 15 : 18);
+        }
         if ("senal".equals(style)) {
             views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, 15);
             views.setTextViewTextSize(R.id.unit, TypedValue.COMPLEX_UNIT_SP, 9);
-        } else {
-            views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, narrow ? 15 : 18);
         }
-        views.setTextViewTextSize(R.id.date, TypedValue.COMPLEX_UNIT_SP, 12);
-        views.setViewVisibility(R.id.logo, "cartel".equals(style) || narrow ? View.GONE : View.VISIBLE);
-        views.setViewVisibility(R.id.date, shortHeight ? View.GONE : View.VISIBLE);
+        boolean clockOnly = mode == SHORT;
+        if (hasDate(style)) views.setViewVisibility(R.id.date, clockOnly ? View.GONE : View.VISIBLE);
+        if (hasTemp(style)) views.setViewVisibility(R.id.temp, clockOnly ? View.GONE : View.VISIBLE);
+        if (hasDay(style)) views.setViewVisibility(R.id.day, clockOnly ? View.GONE : View.VISIBLE);
+        if (hasLogo(style)) views.setViewVisibility(R.id.logo, View.GONE);
+        if (hasSun(style)) views.setViewVisibility(R.id.sun, clockOnly ? View.GONE : View.VISIBLE);
+        if (hasUnitView(style)) views.setViewVisibility(R.id.unit, clockOnly ? View.GONE : View.VISIBLE);
     }
 
     private static float wideTime(String style) {
@@ -178,6 +179,26 @@ public final class WidgetBinder {
 
     private static boolean hasDots(String style) {
         return "ceditorial".equals(style) || "cinstrumento".equals(style) || "editorial".equals(style) || "instrumento".equals(style);
+    }
+
+    private static boolean hasDate(String style) {
+        return !"ccartel".equals(style);
+    }
+
+    private static boolean hasTemp(String style) {
+        return !"csenal".equals(style);
+    }
+
+    private static boolean hasDay(String style) {
+        return "instrumento".equals(style) || "cinstrumento".equals(style);
+    }
+
+    private static boolean hasLogo(String style) {
+        return !isCompact(style);
+    }
+
+    private static boolean hasUnitView(String style) {
+        return "senal".equals(style) || "cartel".equals(style) || "instrumento".equals(style);
     }
 
     private static boolean isCompact(String style) {
