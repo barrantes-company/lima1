@@ -88,9 +88,9 @@ public final class WidgetBinder {
         views.setTextViewTextSize(R.id.hour, TypedValue.COMPLEX_UNIT_SP, hourSize);
         views.setTextViewTextSize(R.id.minute, TypedValue.COMPLEX_UNIT_SP, minuteSize);
         if ("centro".equals(style) && Build.VERSION.SDK_INT >= 31) {
-            float shift = 0.2f * hourSize * ctx.getResources().getDisplayMetrics().scaledDensity;
+            float shift = 0.26f * hourSize * ctx.getResources().getDisplayMetrics().scaledDensity;
             views.setFloat(R.id.hour, "setTranslationY", -shift);
-            views.setViewLayoutMargin(R.id.minute, RemoteViews.MARGIN_TOP, Math.round(hourSize * 0.68f), TypedValue.COMPLEX_UNIT_SP);
+            views.setViewLayoutMargin(R.id.minute, RemoteViews.MARGIN_TOP, Math.round(hourSize * 0.62f), TypedValue.COMPLEX_UNIT_SP);
         }
         if ("cartel".equals(style) || "centro".equals(style)) views.setTextColor(R.id.minute, 0xD6F4F4F2);
         views.setTextViewTextSize(R.id.temp, TypedValue.COMPLEX_UNIT_SP, narrow ? 15 : 18);
